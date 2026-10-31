@@ -72,6 +72,17 @@ describe("SingleSelectListField", () => {
     expect(screen.getByText(secondOption)).toBeInTheDocument();
   });
 
+  it("selects an option with the keyboard", async () => {
+    const { onChange } = setup();
+
+    await userEvent.tab();
+    expect(screen.getByTestId(`${firstOption}-filter-value`)).toHaveFocus();
+
+    await userEvent.keyboard("{Enter}");
+
+    expect(onChange).toHaveBeenCalledWith([firstOption]);
+  });
+
   it("should not create duplicate options for non-string values", () => {
     setup({ value: [true, false], options: [[true], [false]] });
     expect(screen.getAllByText("true")).toHaveLength(1);

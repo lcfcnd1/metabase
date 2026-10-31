@@ -171,6 +171,7 @@ export const SingleSelectListField = ({
       <Box
         component="ul"
         className={S.optionsList}
+        role="listbox"
         mah={isDashboardFilter ? 300 : undefined}
         pt="sm"
       >
@@ -188,7 +189,16 @@ export const SingleSelectListField = ({
                 bdrs="xxs"
                 c={isSelected ? "text-selected" : undefined}
                 bg={isSelected ? selectedBackground : undefined}
+                role="option"
+                aria-selected={isSelected}
+                tabIndex={0}
                 onClick={() => onClickOption(option[0])}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onClickOption(option[0]);
+                  }
+                }}
                 onMouseDown={(e) => e.preventDefault()}
               >
                 {optionRenderer(option)}
