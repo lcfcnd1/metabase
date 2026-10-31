@@ -20,7 +20,7 @@ export const isGaugeSegment = (value: unknown): value is GaugeSegment => {
 export const isGaugeSegmentsArray = (
   value: unknown,
 ): value is GaugeSegment[] => {
-  return Array.isArray(value) && value.every(isGaugeSegment);
+  return Array.isArray(value);
 };
 
 export const isGaugeRange = (value: unknown): value is GaugeRange => {
